@@ -1,0 +1,152 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>凤竹村</title>
+<meta name="viewport"
+	content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+<link rel="stylesheet" href="h5wap/css/api.css">
+<link rel="stylesheet" href="h5wap/css/detail.css">
+<link rel="stylesheet" href="h5wap/css/move.css">
+<link rel="stylesheet" href="h5wap/css/common.css">
+</head>
+<body>
+	<menu class="clearfix" id="fixed-menu"></menu>
+	<section class="container">
+		<div class="main-container" id="main-container">
+			<div id="strategy" class="contatiner">
+				<div id="h5menu" class="sub-container menu">
+
+					<div id="moveable-area">
+						<div class="menu-tag moveable-el">美景</div>
+						<div class="menu-tag moveable-el">文化</div>
+						<div class="menu-tag moveable-el">游玩</div>
+					</div>
+					<br>
+					<div style="width:160px;height:32px;margin:20px 5px;">
+						<img src="h5wap/image/add.png" alt="添加功略分类" onclick="addGuideMenuPer()"/>
+					</div>
+					<div id="menu-drop-line" class="drop">拉到这里删除</div>
+					<div class="menu-adder">
+						<select id="menu-adder-select" style="width:98%;margin:3px">
+							<option value="0"></option>
+							<option value="美景">美景</option>
+							<option value="文化">文化</option>
+							<option value="游玩">游玩</option>
+							<option value="美食">美食</option>
+							<option value="购物">购物</option>
+							<option value="住宿">住宿</option>
+							<option value="其他">其他</option>
+						</select>
+					</div>
+				</div>
+				
+				<div id="h5edit" class="sub-container">
+					<dl class="sub-title">
+						<dt>
+							<i class="iconfont"></i>
+						</dt>
+						<dd>美景</dd>
+					</dl>
+					<div class="sub-content">
+						<img class="moveable-block"
+							src="http://yjcun-gallery.oss-cn-hangzhou.aliyuncs.com/1229e3ff-2ec0-4e49-b5ee-1c84bfcc5118.jpg">
+						<img class="moveable-block"
+							src="http://yjcun-gallery.oss-cn-hangzhou.aliyuncs.com/51527683-de12-4700-ba3c-7d0de39fa8b8.jpg">
+						<p class="moveable-block">三月，梨花开了，时光的流逝是飞快的，梨花却开出了月白风清时光悠悠的味道，透露着生命的宁静与祥和，且有烂漫的野花搭配着，短短二十天的花期也不寂寞。到六月梨满枝头，又迎来了采梨的游客。</p>
+						<br>
+						<div style="height:62px">
+							<div style="width:160px;height:32px;margin:20px 5px;float:left">
+								<img src="h5wap/image/add-sub.png" />
+							</div>
+							<div style="width:160px;height:32px;margin:20px 5px;float:left">
+								<img src="h5wap/image/edit.png" />
+							</div>
+						</div>
+						
+						<div id="block-drop-line" class="drop">拉到这里删除</div>
+					</div>
+					<dl class="sub-title">
+						<dt>
+							<i class="iconfont"></i>
+						</dt>
+						<dd>文化</dd>
+					</dl>
+					<div class="sub-content">
+						<img
+							src="http://yjcun-gallery.oss-cn-hangzhou.aliyuncs.com/a464ec96-af19-4bb8-84e5-7576b1114aa7.jpg">
+						<img
+							src="http://yjcun-gallery.oss-cn-hangzhou.aliyuncs.com/ded389c4-d754-461f-8768-45f173d904e7.jpg">
+						<p>山莓又名树莓，直立灌木，高1～3米，每年四月，果园小道两边的野生山莓便结满了红嘟嘟的小果子，甜极了，还具有涩精、益肾、助阳、明目、醒酒止渴、化痰解毒的功效。</p>
+						
+						<br>
+						<div style="height:62px">
+							<div style="width:160px;height:32px;margin:20px 5px;float:left">
+								<img src="h5wap/image/add-sub.png" />
+							</div>
+							<div style="width:160px;height:32px;margin:20px 5px;float:left">
+								<img src="h5wap/image/edit.png" />
+							</div>
+						</div>
+						
+						<div class="drop">拉到这里删除</div>
+					</div>
+					
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script src="h5wap/script/jquery-1.8.0.min.js"></script>
+	<script src="h5wap/script/move.js"></script>
+	<script src="h5wap/script/move-block.js"></script>
+	<script src="h5wap/script/common.js"></script>
+	<script>
+
+		$(document).ready(function(){
+			//newMenuMove();
+		});
+
+		$("#menu-adder-select").change(function(){
+			//alert($(this).children('option:selected').text()); 
+			guideMenuAdd($(this).children('option:selected').text());
+			$("#menu-adder-select").val("0");
+			$(".menu-adder").hide();
+		});
+
+		//打开Menu新增
+		function addGuideMenuPer(){
+			if($(".menu-adder").is(":hidden")){
+				$(".menu-adder").show();
+			}
+		}
+
+		function guideMenuAdd(text){
+			var duplicate = false;
+			$(".moveable-el").each(function(){
+				 if($(this).html()==text){
+				 	duplicate = true;
+				 	dailog(100,200,"不能添加重复的分类！");
+				 }
+			});
+
+			if(!duplicate){
+				var html = "<div class='menu-tag moveable-el'>"+text+"</div>";
+				$("#moveable-area").append(html);
+				//newMenuMove();
+				html = "<dl class='sub-title'><dt><i class='iconfont'></i></dt><dd>"+text+"</dd></dl>";
+				html += "<div class='sub-content'><br>";
+
+				html += "<div style='height:62px'><div style='width:160px;height:32px;margin:20px 5px;float:left'><img src='h5wap/image/add-sub.png' /></div><div style='width:160px;height:32px;margin:20px 5px;float:left'><img src='h5wap/image/edit.png' /></div></div><div class='drop'>拉到这里删除</div></div>";
+
+						
+				$("#h5edit").append(html);
+
+				 
+			}
+		}
+		
+	</script>
+
+</body>
+</html>
